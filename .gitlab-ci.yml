@@ -30,11 +30,11 @@ traefik:
         
         # first stop docker process  
         - sudo docker stop  $(sudo docker container ls -aq --filter name=traefik)
-
+        - sudo docker stop  $(sudo docker container ls -aq --filter name=whoami)
         # clean up all stop images
         - sudo docker container prune -f
         - sudo docker image prune -a -f
 
-        - sudo docker run --name traefik -p 8080:8080 -p 80:80 -v $PWD/traefik.sample.toml:/etc/traefik/traefik.toml traefik
+        - sudo docker-compose up
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
         - set -e # Enable exit on error 
