@@ -35,6 +35,6 @@ traefik:
         - sudo docker container prune -f
         - sudo docker image prune -a -f
 
-        - sudo docker run -p 8080:8080 -p 80:80 -v $PWD/traefik.sample.toml:/etc/traefik/traefik.toml traefik
+        - sudo docker run --name traefik -p 8080:8080 -p 80:80 -v $PWD/traefik.sample.toml:/etc/traefik/traefik.toml traefik
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
         - set -e # Enable exit on error 
