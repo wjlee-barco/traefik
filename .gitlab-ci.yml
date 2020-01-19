@@ -1,0 +1,40 @@
+traefik:
+#  variables:
+#    CI_DEBUG_TRACE: "true"
+    tags:
+        - shell, ubuntu, wjlee.myqnapcloud.com
+    stage: deploy
+    cache:
+        paths:
+    before_script:
+        - set +e # Disable exit on error
+        - whoami
+        - sudo bash ./scripts/before_script_env.sh
+        # - sudo bash ./scripts/before_script_install.sh
+        - set -e # Enable exit on error 
+    script:
+        - set +e # Disable exit on error
+        - echo $PWD
+        # echo " Assume user is gitlab-runner. If root, then sudo can be removed"
+        - echo $USER
+        - ip route show
+        - ifconfig
+        
+        - sudo lsb_release -a
+        - sudo uname -a
+        - sudo docker --version
+        - sudo docker images
+        - sudo docker system df
+        - sudo docker ps
+        - sudo docker container ls -q
+        
+        # first stop docker process  
+        - sudo docker stop  $(sudo docker container ls -aq --filter name=traefik)
+
+        # clean up all stop images
+        - sudo docker container prune -f
+        - sudo docker image prune -a -f
+
+        - docker run -p 8080:8080 -p 80:80 -v $PWD/traefik.sample.toml:/etc/traefik/traefik.toml traefik
+        - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
+        - set -e # Enable exit on error 
