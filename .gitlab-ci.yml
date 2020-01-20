@@ -29,13 +29,13 @@ traefik:
         - sudo docker container ls -q
         
         # first stop docker process  
-        - sudo docker stop  $(sudo docker container ls -aq --filter name=traefik*)
-        - sudo docker stop  $(sudo docker container ls -aq --filter name=whoami*)
+        - sudo docker stop  $(sudo docker container ls -aq --filter name=${TRAEFIK}*)
+        - sudo docker stop  $(sudo docker container ls -aq --filter name=${WHOAMI}*)
         # clean up all stop images
         - sudo docker container prune -f
         - sudo docker image prune -a -f
 
-        - sudo docker-compose up -d -e WHOAMI=whoami --scale whoami=2
-        - sudo docker-compose up    -e TRAEFIK=traefik traefik
+        - sudo docker-compose up -d --scale whoami=2
+        - sudo docker-compose up    traefik
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
         - set -e # Enable exit on error 
