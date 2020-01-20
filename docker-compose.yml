@@ -1,18 +1,29 @@
 version: '3'
 
 services:
-  reverse-proxy:
+  traefik:
     # The official v2.0 Traefik docker image
     image: traefik:v2.0
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker
     container_name: traefik
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.mytlschallenge.acme.tlschallenge=true"
+      #- "--certificatesresolvers.mytlschallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.mytlschallenge.acme.email=wjlee@csie.nctu.edu.tw"
+      - "--certificatesresolvers.mytlschallenge.acme.storage=/letsencrypt/acme.json"
     ports:
+      - "443:443"
       # The HTTP port
       - "80:80"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
+      - $PWD/letsencrypt:/letsencrypt
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
       # - $PWD/traefik.toml:/etc/traefik/traefik.toml
@@ -21,4 +32,7 @@ services:
     image: containous/whoami
     container_name: whoami
     labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+      - "traefik.http.routers.whoami.rule=Host(`wjlee.myqnapcloud.com`)"
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls.certresolver=mytlschallenge"
