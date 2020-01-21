@@ -26,8 +26,6 @@ defaultEntryPoints = ["web-secure","web"]
 [entryPoints]
   [entryPoints.web]
     address = ":80"
-    [entryPoints.web.redirect]
-    entryPoint = "websecure"
   [entryPoints.websecure]
     address = ":443"
 
