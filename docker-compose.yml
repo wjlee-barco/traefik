@@ -8,7 +8,7 @@ services:
     # Enables the web UI and tells Traefik to listen to docker
     container_name: traefik
     command:
-      - "--metrics.prometheus=true"
+      - --metrics.prometheus=true
     ports:
       # The HTTP port
       - "80:80"
@@ -29,3 +29,33 @@ services:
       - "traefik.http.routers.whoami.rule=Host(`wjlee.myqnapcloud.com`)"
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.entrypoints=websecure"
+  yourls:
+    image: yourls
+    container_name:  yourls
+    restart: always
+    ports:
+      - 8087:80
+    labels:
+      - traefik.backend=yourls
+      - traefik.frontend.rule=Host:wjlee.myqnapcloud.com/yourls
+      - traefik.docker.network=proxy
+      - traefik.port=80
+    env_file:
+      - yourl.env
+    networks:
+      - internal
+      - proxy
+  # shields:
+  #     image: beevelop/shields
+  #     container_name: shields      
+  #     environment:
+  #       INFOSITE: https://wjlee.myqnapcloud.com
+  #     restart: always
+  # varnish:
+  #   image: beevelop/varnish
+  #   container_name: varnish     
+  #   environment:
+  #     VIRTUAL_HOST: https://wjlee.myqnapcloud.com
+  #   links:
+  #       - "shields:backend"
+  #   restart: always
