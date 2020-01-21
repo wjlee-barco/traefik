@@ -22,7 +22,6 @@
 # Optional
 # Default:
 
-defaultEntryPoints = ["web-secure","web"]
 [entryPoints]
   [entryPoints.web]
     address = ":80"
