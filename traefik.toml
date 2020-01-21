@@ -21,10 +21,13 @@
 #
 # Optional
 # Default:
+
+defaultEntryPoints = ["web-secure","web"]
 [entryPoints]
   [entryPoints.web]
     address = ":80"
-
+    [entryPoints.web.redirect]
+    entryPoint = "websecure"
   [entryPoints.websecure]
     address = ":443"
 
@@ -100,14 +103,14 @@
   # Optional
   # Default: true
   #
-  # insecure = false
+  insecure = true
 
   # Enabled Dashboard
   #
   # Optional
   # Default: true
   #
-  # dashboard = false
+  dashboard = true
 
 ################################################################
 # Ping configuration
@@ -149,4 +152,17 @@
   # Optional
   # Default: true
   #
-  # exposedByDefault = false
+  exposedByDefault = false
+[docker]
+  endpoint = "unix:///var/run/docker.sock"
+  domain = "wjlee.myqnapcloud.com"
+  watch = true
+  exposedbydefault = false
+
+[acme]
+email = "wjlee@csie.nctu.edu.tw"
+storage = "acme.json"
+entryPoint = "web-secure"
+OnHostRule = true
+[acme.httpChallenge]
+entryPoint = "web"

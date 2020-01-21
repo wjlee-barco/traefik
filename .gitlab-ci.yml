@@ -29,8 +29,8 @@ traefik:
         - sudo docker container ls -q
         
         # first stop docker process  
-        - sudo docker stop  $(sudo docker container ls -aq --filter name=$TRAEFIK*)
-        - sudo docker stop  $(sudo docker container ls -aq --filter name=$WHOAMI*)
+        - sudo docker stop  $(sudo docker container ls -aq --filter name=traefik*)
+        - sudo docker stop  $(sudo docker container ls -aq --filter name=whoami*)
         # clean up all stop images
         - sudo docker container prune -f
         - sudo docker image prune -a -f
