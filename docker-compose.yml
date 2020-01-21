@@ -16,11 +16,11 @@ services:
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
-      - $PWD/letsencrypt:/letsencrypt
+      - ./letsencrypt:/letsencrypt
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
-      - $PWD/traefik.toml:/etc/traefik/traefik.toml
-      - $PWD/acme.json:/acme.json
+      - ./traefik.toml:/etc/traefik/traefik.toml
+      - ./acme.json:/acme.json
   whoami:
     # A container that exposes an API to show its IP address
     image: containous/whoami
