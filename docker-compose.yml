@@ -1,5 +1,10 @@
 version: '3'
 
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false
 services:
   traefik:
     # The official v2.0 Traefik docker image
@@ -27,9 +32,9 @@ services:
     restart: always
     container_name:  whoami
     labels:
-      - "traefik.http.routers.whoami.rule=Host(`wjlee.myqnapcloud.com`)"
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`wjlee.myqnapcloud.com`)
+      - traefik.http.routers.whoami.entrypoints=websecure
   yourls:
     image: yourls
     container_name:  yourls
@@ -37,10 +42,10 @@ services:
     ports:
       - 8087:80
     labels:
-      - traefik.backend=yourls
-      - traefik.frontend.rule=Host:wjlee.myqnapcloud.com/yourls
+      - traefik.enable=true
+      - traefik.http.routers.yourls.rule=Host(`wjlee.myqnapcloud.com/yourls`)
       - traefik.docker.network=proxy
-      - traefik.port=80
+      - traefik.http.services.my-service.loadbalancer.server.port=8087
     env_file:
       - .env
     networks:
