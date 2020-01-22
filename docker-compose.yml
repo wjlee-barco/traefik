@@ -13,8 +13,8 @@ services:
     command:
       - --api.dashboard=true
       - --docker
-      - --entryPoints.web.address=:80
-      - --entryPoints.websecure.address=:443
+      - --entryPoints.http.address=:80
+      - --entryPoints.https.address=:443
       - --certificatesResolvers.basic.acme.email=wjlee@csie.nctu.edu.tw
       - --certificatesResolvers.basic.acme.storage=/acme.json
       - --certificatesResolvers.basic.acme.httpChallenge.entryPoint=http
