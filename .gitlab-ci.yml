@@ -38,9 +38,11 @@ traefik:
         - sudo docker image prune -a -f
 
         - sudo docker network create proxy
+        - sudo docker network create internal
+
         - sudo docker-compose up -d traefik
-        - sudo docker-compose up -d whoami
-        - sudo docker-compose up yourls
+        - sudo docker-compose up whoami
+        # - sudo docker-compose up yourls
 
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
         - set -e # Enable exit on error 
