@@ -41,7 +41,7 @@ traefik:
         - sudo docker network create internal
 
         - sudo docker-compose up traefik
-        # - sudo docker-compose up whoami
+        - sudo docker-compose up whoami
         # - sudo docker-compose up yourls
 
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
