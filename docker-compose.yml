@@ -18,6 +18,8 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
+    networks:
+      - proxy
     volumes:
       - ./letsencrypt:/letsencrypt
       # So that Traefik can listen to the Docker events
