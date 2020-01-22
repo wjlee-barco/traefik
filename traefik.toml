@@ -22,8 +22,6 @@
 # Optional
 # Default:
 
-defaultEntryPoints = ["https","http"]
-
 [entryPoints]
   [entryPoints.http]
     address = ":80"
