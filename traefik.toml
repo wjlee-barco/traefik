@@ -164,3 +164,4 @@ caServer = "https://acme-v02.api.letsencrypt.org/directory"
 entryPoint = https
 OnHostRule = true
 [acme.httpChallenge]
+entrypoint = http
