@@ -24,6 +24,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.toml:/etc/traefik/traefik.toml
       - ./acme.json:/acme.json
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=Host(`wjlee.myqnapcloud.com/whoami`)
+      - traefik.http.routers.traefik.entrypoints=https
+      - traefik.http.services.traefik.loadbalancer.server.port=8086
+      - traefik.docker.network=proxy
+    network:
+      - proxy
   whoami:
     # A container that exposes an API to show its IP address
     image: containous/whoami
@@ -34,9 +42,11 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.whoami.rule=Host(`wjlee.myqnapcloud.com/whoami`)
-      - traefik.http.routers.whoami.entrypoints=websecure
-      - traefik.http.services.yourls.loadbalancer.server.port=8086
+      - traefik.http.routers.whoami.entrypoints=https
+      - traefik.http.services.whoami.loadbalancer.server.port=8086
       - traefik.docker.network=proxy
+    networks:
+      - proxy
   yourls:
     image: yourls
     container_name:  yourls
@@ -46,13 +56,12 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.yourls.rule=Host(`wjlee.myqnapcloud.com/yourls`)
-      - traefik.http.routers.whoami.entrypoints=websecure
+      - traefik.http.routers.yourls.entrypoints=https
       - traefik.http.services.yourls.loadbalancer.server.port=8087
       - traefik.docker.network=proxy
     env_file:
       - .env
     networks:
-      - internal
       - proxy
   # shields:
   #     image: beevelop/shields

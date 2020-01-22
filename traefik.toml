@@ -23,9 +23,9 @@
 # Default:
 
 [entryPoints]
-  [entryPoints.web]
+  [entryPoints.http]
     address = ":80"
-  [entryPoints.websecure]
+  [entryPoints.https]
     address = ":443"
 
 ################################################################
@@ -159,7 +159,7 @@
 [acme]
 email = "wjlee@csie.nctu.edu.tw"
 storage = "acme.json"
-entryPoint = "web-secure"
+entryPoint = "https"
 OnHostRule = true
 [acme.httpChallenge]
-entryPoint = "web"
+entryPoint = "http"
