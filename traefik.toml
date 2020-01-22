@@ -22,11 +22,16 @@
 # Optional
 # Default:
 
+defaultEntryPoints = ["https","http"]
+
 [entryPoints]
   [entryPoints.http]
     address = ":80"
+    [entryPoints.http.redirect]
+      entryPoint = "https"
   [entryPoints.https]
     address = ":443"
+  [entryPoints.https.tls]
 
 ################################################################
 # Traefik logs configuration
@@ -159,9 +164,10 @@
 [acme]
 acmeLogging = true
 email = "wjlee@csie.nctu.edu.tw"
-storage = "/acme.json"
+storage = "acme.json"
 caServer = "https://acme-v02.api.letsencrypt.org/directory"
-entryPoint = https
+entryPoint = "https"
 OnHostRule = true
+
 [acme.httpChallenge]
-entrypoint = http
+entryPoint = "http"
