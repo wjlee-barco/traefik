@@ -158,7 +158,8 @@
 
 [acme]
 email = "wjlee@csie.nctu.edu.tw"
-storage = "acme.json"
+storage = "/acme.json"
+caServer = "https://acme-v02.api.letsencrypt.org/directory"
 entryPoint = "https"
 OnHostRule = true
 [acme.httpChallenge]
