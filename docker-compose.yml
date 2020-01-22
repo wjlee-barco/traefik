@@ -15,7 +15,6 @@ services:
     command:
       - --api.insecure=true 
       - --api.dashboard=true
-      - --docker
       - --entryPoints.http.address=:80
       - --entryPoints.https.address=:443
       - --certificatesResolvers.basic.acme.email=wjlee@csie.nctu.edu.tw
