@@ -24,8 +24,8 @@ services:
       - --providers.docker.exposedByDefault=false
       - --metrics.prometheus=true
     ports:
-      - 80
-      - 443
+      - 80:80
+      - 443:443
       - 8080:8080
     networks:
       - proxy
@@ -44,7 +44,7 @@ services:
       - 8086:80
     labels:
       - traefik.enable=true
-      - traefik.http.routers.whoami.rule=Host(`wjlee.myqnapcloud.com/whoami`)
+      - traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)
       - traefik.http.routers.whoami.entrypoints=https
       - traefik.http.services.whoami.loadbalancer.server.port=8086
       - traefik.docker.network=proxy
