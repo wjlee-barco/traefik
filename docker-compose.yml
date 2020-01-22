@@ -3,6 +3,8 @@ version: '3'
 networks:
   proxy:
     external: true
+  internal:
+    external: false
 services:
   traefik:
     # The official v2.0 Traefik docker image
@@ -48,24 +50,24 @@ services:
       - traefik.docker.network=proxy
     networks:
       - proxy
-  yourls:
-    image: yourls
-    container_name:  yourls
-    restart: always
-    ports:
-      - 8087:80
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.yourls.rule=Host(`wjlee.myqnapcloud.com/yourls`)
-      - traefik.http.routers.yourls.entrypoints=https
-      - traefik.http.services.yourls.loadbalancer.server.port=8087
-      - traefik.docker.network=proxy
-      - traefik.docker.network=internal
-    env_file:
-      - .env
-    networks:
-      - proxy
-      - internal
+  # yourls:
+  #   image: yourls
+  #   container_name:  yourls
+  #   restart: always
+  #   ports:
+  #     - 8087:80
+  #   labels:
+  #     - traefik.enable=true
+  #     - traefik.http.routers.yourls.rule=Host(`wjlee.myqnapcloud.com/yourls`)
+  #     - traefik.http.routers.yourls.entrypoints=https
+  #     - traefik.http.services.yourls.loadbalancer.server.port=8087
+  #     - traefik.docker.network=proxy
+  #     - traefik.docker.network=internal
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - proxy
+  #     - internal
   # shields:
   #     image: beevelop/shields
   #     container_name: shields      
