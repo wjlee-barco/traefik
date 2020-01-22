@@ -10,6 +10,9 @@ traefik:
         - set +e # Disable exit on error
         - whoami
         - sudo bash ./scripts/before_script_env.sh
+        
+        - sudo chown -R gitlab-runner:gitlab-runner ./acme.json
+        - sudo chmod 600 ./acme.json
         # - sudo bash ./scripts/before_script_install.sh
         - set -e # Enable exit on error 
     script:
@@ -40,11 +43,9 @@ traefik:
         - sudo docker network create proxy
         - sudo docker network create internal
 
-        - sudo docker-compose up -d traefik
-        - sudo docker exec --tty traefik env TERM=xterm sudo chmod 600 ./acme.json
-
-        - sudo docker-compose up whoami
-        # - sudo docker-compose up yourls
+        - sudo docker-compose up
 
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
+        - sudo chown -R gitlab-runner:gitlab-runner ./acme.json
+        - sudo chmod 600 ./acme.json
         - set -e # Enable exit on error 
