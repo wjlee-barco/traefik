@@ -11,6 +11,8 @@ services:
     # Enables the web UI and tells Traefik to listen to docker
     container_name: traefik
     command:
+      - --api 
+      - --docker
       - --metrics.prometheus=true
     ports:
       - 80:80
@@ -24,9 +26,9 @@ services:
       - ./acme.json:/acme.json
     labels:
       - traefik.enable=true
-      - traefik.http.routers.traefik.rule=Host(`wjlee.myqnapcloud.com/whoami`)
+      - traefik.http.routers.traefik.rule=Host(`wjlee.myqnapcloud.com/traefik`)
       - traefik.http.routers.traefik.entrypoints=https
-      - traefik.http.services.traefik.loadbalancer.server.port=8086
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
       - traefik.docker.network=proxy
   whoami:
     # A container that exposes an API to show its IP address
