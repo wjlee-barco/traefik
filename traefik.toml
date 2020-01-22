@@ -29,8 +29,7 @@ defaultEntryPoints = ["https","http"]
     address = ":80"
   [entryPoints.https]
     address = ":443"
-  [entryPoints.https.tls]
-  
+
 [http.middlewares]
   [http.middlewares.https-redirect.redirectscheme]
     scheme = "https"
