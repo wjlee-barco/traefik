@@ -11,8 +11,8 @@ traefik:
         - whoami
         - sudo bash ./scripts/before_script_env.sh
         
-        - sudo chown -R gitlab-runner:gitlab-runner ./acme.json
-        - sudo chmod 600 ./acme.json
+        - sudo chown -R gitlab-runner:gitlab-runner "acme.json"
+        - sudo chmod 600 "acme.json"
         # - sudo bash ./scripts/before_script_install.sh
         - set -e # Enable exit on error 
     script:
