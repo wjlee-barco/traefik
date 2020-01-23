@@ -32,7 +32,7 @@
 
 [certificatesResolvers.sample.acme]
   email = "wjlee@csie.nctu.edu.tw"
-  storage = "acme.json"
+  storage = "/etc/traefik/acme.json"
   [certificatesResolvers.sample.acme.httpChallenge]
     # used during the challenge
     entryPoint = "http"
@@ -176,7 +176,7 @@
 [acme]
   acmeLogging = true
   email = "wjlee@csie.nctu.edu.tw"
-  storage = "acme.json"
+  storage = "/etc/traefik/acme.json"
   caServer = "https://acme-v02.api.letsencrypt.org/directory"
   entryPoint = "https"
   OnHostRule = true
