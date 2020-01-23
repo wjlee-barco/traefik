@@ -13,16 +13,6 @@ services:
     # Enables the web UI and tells Traefik to listen to docker
     container_name: traefik
     command:
-      - --api.insecure=true 
-      - --api.dashboard=true
-      - --entryPoints.http.address=:80
-      - --entryPoints.https.address=:443
-      - --certificatesResolvers.basic.acme.email=wjlee@csie.nctu.edu.tw
-      - --certificatesResolvers.basic.acme.storage=/acme.json
-      - --certificatesResolvers.basic.acme.httpChallenge.entryPoint=http
-      - --providers.docker=true
-      - --providers.docker.exposedByDefault=false
-      - --metrics.prometheus=true
     ports:
       - 80:80
       - 443:443

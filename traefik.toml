@@ -27,6 +27,15 @@
     address = ":80"
   [entryPoints.https]
     address = ":443"
+  [entryPoints.metrics]
+    address = ":8082"
+
+[certificatesResolvers.sample.acme]
+  email = "wjlee@csie.nctu.edu.tw"
+  storage = "acme.json"
+  [certificatesResolvers.sample.acme.httpChallenge]
+    # used during the challenge
+    entryPoint = "http"
 
 [http.middlewares]
   [http.middlewares.https-redirect.redirectscheme]
@@ -160,13 +169,25 @@
   watch = true
   exposedbydefault = false
 
+################################################################
+# ACME
+################################################################
+
 [acme]
-acmeLogging = true
-email = "wjlee@csie.nctu.edu.tw"
-storage = "acme.json"
-caServer = "https://acme-v02.api.letsencrypt.org/directory"
-entryPoint = "https"
-OnHostRule = true
+  acmeLogging = true
+  email = "wjlee@csie.nctu.edu.tw"
+  storage = "acme.json"
+  caServer = "https://acme-v02.api.letsencrypt.org/directory"
+  entryPoint = "https"
+  OnHostRule = true
 
 [acme.httpChallenge]
-entryPoint = "http"
+  entryPoint = "http"
+
+################################################################
+# metrics
+################################################################
+
+[metrics]
+  [metrics.prometheus]
+    entryPoint = "metrics"
