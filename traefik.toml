@@ -205,6 +205,7 @@
       service = "whoami"
       rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
       [http.routers.Router-1-https.tls] # will terminate the TLS request
+        certResolver = "whoami"
     [http.routers.whoami-http]
       entryPoints = ["http"]
       middlewares = ["https-redirect"]
