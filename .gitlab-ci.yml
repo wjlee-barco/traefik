@@ -10,7 +10,7 @@ traefik:
         - set +e # Disable exit on error
         - whoami
         - sudo bash ./scripts/before_script_env.sh
-        - sudo mkdir $PWD/acme.json
+        - sudo touch $PWD/acme.json
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/acme.json
         - sudo chmod 600 $PWD/acme.json
         # - sudo bash ./scripts/before_script_install.sh
