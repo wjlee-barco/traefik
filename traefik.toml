@@ -198,13 +198,19 @@
 [http]
   # Add the router
   [http.routers]
-    [http.routers.whoami]
+    [http.routers.whoami-https]
       entryPoints = ["http"]
       middlewares = ["https-redirect"]
       #middlewares = ["whoami-auth"]      
       service = "whoami"
-      rule = "Path(`/whoami`)"
-
+      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
+      [http.routers.Router-1-https.tls] # will terminate the TLS request
+    [http.routers.whoami-http]
+      entryPoints = ["https"]
+      middlewares = ["https-redirect"]
+      #middlewares = ["whoami-auth"]      
+      service = "whoami"
+      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
   # Add the middleware
   [http.middlewares]    
   #  [http.middlewares.whoami-auth.basicAuth]
