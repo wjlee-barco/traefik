@@ -15,7 +15,7 @@ traefik:
         - sudo chmod 600 $PWD/acme.json
 
         - sudo mkdir log
-        - touch log/access.log
+        - sudo touch log/access.log
         - sudo chown -R gitlab-runner:gitlab-runner log
         # - sudo bash ./scripts/before_script_install.sh
         - set -e # Enable exit on error 
