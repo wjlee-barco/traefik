@@ -12,7 +12,6 @@ services:
     restart: always
     # Enables the web UI and tells Traefik to listen to docker
     container_name: traefik
-    command:
     ports:
       - 80:80
       - 443:443
