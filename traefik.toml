@@ -30,16 +30,13 @@
   [entryPoints.metrics]
     address = ":8082"
 
-[certificatesResolvers.sample.acme]
+[certificatesResolvers.basic.acme]
   email = "wjlee@csie.nctu.edu.tw"
   storage = "/etc/traefik/acme.json"
-  [certificatesResolvers.sample.acme.httpChallenge]
+  [certificatesResolvers.basic.acme.httpChallenge]
     # used during the challenge
     entryPoint = "http"
 
-[http.middlewares]
-  [http.middlewares.https-redirect.redirectscheme]
-    scheme = "https"
 
 ################################################################
 # Traefik logs configuration
@@ -191,3 +188,34 @@
 [metrics]
   [metrics.prometheus]
     entryPoint = "metrics"
+
+################################################################
+# http
+################################################################
+
+[http]
+  # Add the router
+  [http.routers]
+    [http.routers.whoami]
+      entryPoints = ["http"]
+      middlewares = ["https-redirect"]
+      #middlewares = ["whoami-auth"]      
+      service = "whoami"
+      rule = "Path(`/whoami`)"
+
+  # Add the middleware
+  [http.middlewares]    
+  #  [http.middlewares.whoami-auth.basicAuth]
+  #    users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/", 
+  #              "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"]
+  #    usersFile = "etc/traefik/.htpasswd"
+    [http.middlewares.https-redirect.redirectscheme]
+      scheme = "https"
+  # Add the service
+  [http.services]
+    [http.services.whoami]
+      [http.services.whoami.loadBalancer]
+        [[http.services.whoami.loadBalancer.servers]]
+          url = "http://192.168.31.31/whoami"
+        [[http.services.whoami.loadBalancer.servers]]
+          url = "http://192.168.31.31/whoami2"
