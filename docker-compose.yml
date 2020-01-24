@@ -29,11 +29,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik-http.entrypoints=http"
-      - "traefik.http.routers.traefik-http.rule=Host(`wjlee.myqnapcloud.com`)"
+      - "traefik.http.routers.traefik-http.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
       - "traefik.http.routers.traefik-http.middlewares=traefik-https-redirect"
 
       - "traefik.http.routers.traefik-https.entrypoints=https"
-      - "traefik.http.routers.traefik-https.rule=Host(`wjlee.myqnapcloud.com`)"
+      - "traefik.http.routers.traefik-https.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
       #- "traefik.http.routers.traefik-https.middlewares=traefik-auth"
 
       - "traefik.http.routers.traefik-https.tls=true"
@@ -54,11 +54,11 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.whoami-http.entrypoints=http
-      - traefik.http.routers.whoami-http.rule=Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)
+      - traefik.http.routers.whoami-http.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)
       - traefik.http.routers.whoami-http.middlewares=whoami-https-redirect
 
       - traefik.http.routers.whoami-https.entrypoints=https
-      - traefik.http.routers.whoami-https.rule=Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)
+      - traefik.http.routers.whoami-https.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)
 
       - traefik.http.routers.whoami-https.tls=true
       - traefik.http.routers.whoami-https.tls.certresolver=le

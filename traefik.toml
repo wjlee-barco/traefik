@@ -180,6 +180,7 @@
 [metrics]
   [metrics.prometheus]
     entryPoint = "metrics"
+    address = ":8082"
 
 ################################################################
 # http
@@ -188,34 +189,32 @@
 [http]
   # Add the router
   [http.routers]
-    [http.routers.whoami-https]
-      entryPoints = ["https"]
+    [http.routers.whoami-http]
+      entryPoints = ["http"]
       middlewares = ["https-redirect"]
       #middlewares = ["whoami-auth"]      
       service = "whoami"
-      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
-      [http.routers.whoami-https.tls] # will terminate the TLS request
+      rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)"
+    [http.routers.whoami-https]
+      entryPoints = ["https"]
+      #middlewares = ["whoami-auth"]      
+      service = "whoami"
+      rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)"
+      [http.routers.whoami-https.tls]
         certResolver = "le"
     [http.routers.traefik-http]
       entryPoints = ["http"]
       middlewares = ["https-redirect"]
       #middlewares = ["traefik-auth"]      
       service = "traefik"
-      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/traefik/`)"
-      [http.routers.traefik-https]
+      rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
+    [http.routers.traefik-https]
       entryPoints = ["https"]
-      middlewares = ["https-redirect"]
       #middlewares = ["traefik-auth"]      
       service = "traefik"
-      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/traefik/`)"
-      [http.routers.traefik-https.tls] # will terminate the TLS request
+      rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
+      [http.routers.traefik-https.tls]
         certResolver = "le"
-    [http.routers.whoami-http]
-      entryPoints = ["http"]
-      middlewares = ["https-redirect"]
-      #middlewares = ["whoami-auth"]      
-      service = "whoami"
-      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
   # Add the middleware
   [http.middlewares]    
   #  [http.middlewares.whoami-auth.basicAuth]
