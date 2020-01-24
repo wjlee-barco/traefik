@@ -37,7 +37,7 @@ services:
       #- "traefik.http.routers.traefik-https.middlewares=traefik-auth"
 
       - "traefik.http.routers.traefik-https.tls=true"
-      - "traefik.http.routers.traefik-https.tls.certresolver=http"
+      - "traefik.http.routers.traefik-https.tls.certresolver=le"
       - "traefik.http.routers.traefik-https.service=api@internal"
 
       #- "traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD"
@@ -61,7 +61,7 @@ services:
       - traefik.http.routers.whoami-https.rule=Host(`wjlee.myqnapcloud.com/whoami`)
 
       - traefik.http.routers.whoami-https.tls=true
-      - traefik.http.routers.whoami-https.tls.certresolver=http
+      - traefik.http.routers.whoami-https.tls.certresolver=le
       - traefik.http.routers.whoami-https.service=api@internal
 
       - traefik.http.middlewares.whoami-https-redirect.redirectscheme.scheme=https
