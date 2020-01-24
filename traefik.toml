@@ -195,7 +195,21 @@
       service = "whoami"
       rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
       [http.routers.whoami-https.tls] # will terminate the TLS request
-        certResolver = le
+        certResolver = "le"
+    [http.routers.traefik-http]
+      entryPoints = ["http"]
+      middlewares = ["https-redirect"]
+      #middlewares = ["traefik-auth"]      
+      service = "traefik"
+      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/traefik/`)"
+      [http.routers.traefik-https]
+      entryPoints = ["https"]
+      middlewares = ["https-redirect"]
+      #middlewares = ["traefik-auth"]      
+      service = "traefik"
+      rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/traefik/`)"
+      [http.routers.traefik-https.tls] # will terminate the TLS request
+        certResolver = "le"
     [http.routers.whoami-http]
       entryPoints = ["http"]
       middlewares = ["https-redirect"]
