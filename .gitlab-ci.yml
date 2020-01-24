@@ -10,9 +10,9 @@ traefik:
         - set +e # Disable exit on error
         - whoami
         - sudo bash ./scripts/before_script_env.sh
-        - sudo touch $PWD/acme.json
-        - sudo chown -R gitlab-runner:gitlab-runner $PWD/acme.json
-        - sudo chmod 600 $PWD/acme.json
+        - sudo touch $PWD/letsencrypt/acme.json
+        - sudo chown -R gitlab-runner:gitlab-runner $PWD/letsencrypt/acme.json
+        - sudo chmod 600 $PWD/letsencrypt/acme.json
 
         - sudo mkdir log
         - sudo touch log/access.log
@@ -50,6 +50,6 @@ traefik:
         - sudo docker-compose up
 
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*
-        - sudo chown -R gitlab-runner:gitlab-runner $PWD/acme.json
-        - sudo chmod 600 $PWD/acme.json
+        - sudo chown -R gitlab-runner:gitlab-runner $PWD/letsencrypt/acme.json
+        - sudo chmod 600 $PWD/letsencrypt/acme.json
         - set -e # Enable exit on error 

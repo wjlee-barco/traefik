@@ -32,14 +32,6 @@
   [entryPoints.whoami]
     address = ":8086"
 
-[certificatesResolvers.basic.acme]
-  email = "wjlee@csie.nctu.edu.tw"
-  storage = "/etc/traefik/acme.json"
-  [certificatesResolvers.basic.acme.httpChallenge]
-    # used during the challenge
-    entryPoint = "http"
-
-
 ################################################################
 # Traefik logs configuration
 ################################################################
@@ -179,9 +171,15 @@
   caServer = "https://acme-v02.api.letsencrypt.org/directory"
   entryPoint = "https"
   OnHostRule = true
+  [acme.httpChallenge]
+    entryPoint = "http"
 
-[acme.httpChallenge]
-  entryPoint = "http"
+[certificatesResolvers.le.acme]
+  email = "wjlee@csie.nctu.edu.tw"
+  storage = "/etc/traefik/acme.json"
+  [certificatesResolvers.le.acme.httpChallenge]
+    # used during the challenge
+    entryPoint = "http"
 
 ################################################################
 # metrics
@@ -205,7 +203,7 @@
       service = "whoami"
       rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
       [http.routers.Router-1-https.tls] # will terminate the TLS request
-        certResolver = "whoami"
+        certResolver = "le"
     [http.routers.whoami-http]
       entryPoints = ["http"]
       middlewares = ["https-redirect"]
