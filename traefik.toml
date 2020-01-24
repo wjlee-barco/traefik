@@ -195,7 +195,7 @@
       service = "whoami"
       rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
       [http.routers.whoami-https.tls] # will terminate the TLS request
-        certResolver = "le"
+        certResolver = le
     [http.routers.whoami-http]
       entryPoints = ["http"]
       middlewares = ["https-redirect"]
@@ -208,7 +208,9 @@
   #    users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/", 
   #              "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"]
   #    usersFile = "etc/traefik/.htpasswd"
-    [http.middlewares.https-redirect.redirectscheme]
+    [http.middlewares.whoami-https-redirect.redirectscheme]
+      scheme = "https"
+    [http.middlewares.traefik-https-redirect.redirectscheme]
       scheme = "https"
   # Add the service
   [http.services]
