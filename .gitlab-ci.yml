@@ -10,12 +10,13 @@ traefik:
         - set +e # Disable exit on error
         - whoami
         - sudo bash ./scripts/before_script_env.sh
+        - sudo mkdir letsencrypt
         - sudo touch $PWD/letsencrypt/acme.json
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/letsencrypt/acme.json
         - sudo chmod 600 $PWD/letsencrypt/acme.json
 
         - sudo mkdir log
-        - sudo touch log/access.log
+        # - sudo touch log/access.log
         - sudo chown -R gitlab-runner:gitlab-runner log
         # - sudo bash ./scripts/before_script_install.sh
         - set -e # Enable exit on error 
