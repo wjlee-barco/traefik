@@ -28,6 +28,7 @@ services:
       - ./log/access.log:/etc/traefik/log/access.log
     labels:
       - "traefik.enable=true"
+      ### traefik ===================================================
       - "traefik.http.routers.traefik-http.entrypoints=http"
       - "traefik.http.routers.traefik-http.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
       - "traefik.http.routers.traefik-http.middlewares=traefik-https-redirect"
@@ -38,12 +39,18 @@ services:
 
       - "traefik.http.routers.traefik-https.tls=true"
       - "traefik.http.routers.traefik-https.tls.certresolver=le"
-      - "traefik.http.routers.traefik-https.service=api@internal"
+      - "traefik.http.routers.traefik-https.service=traefik"
 
       #- "traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD"
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+      ### metric ===================================================
+      - "traefik.http.routers.metrics.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/metrics`)"
+      - "traefik.http.routers.metrics.tls=true"
+      - "traefik.http.routers.metrics.tls.certResolver=le"
+      - "traefik.http.routers.metrics.service=metrics"
+      - "traefik.http.services.metrics.loadbalancer.server.port=8082"
   whoami:
     # A container that exposes an API to show its IP address
     image: containous/whoami
@@ -62,7 +69,7 @@ services:
 
       - traefik.http.routers.whoami-https.tls=true
       - traefik.http.routers.whoami-https.tls.certresolver=le
-      - traefik.http.routers.whoami-https.service=api@internal
+      - traefik.http.routers.whoami-https.service=traefik
 
       - traefik.http.middlewares.whoami-https-redirect.redirectscheme.scheme=https
 
