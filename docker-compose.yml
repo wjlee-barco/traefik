@@ -69,7 +69,7 @@ services:
 
       - traefik.http.routers.whoami-https.tls=true
       - traefik.http.routers.whoami-https.tls.certresolver=le
-      - traefik.http.routers.whoami-https.service=traefik
+      - traefik.http.routers.whoami-https.service=whoami
 
       - traefik.http.middlewares.whoami-https-redirect.redirectscheme.scheme=https
 
