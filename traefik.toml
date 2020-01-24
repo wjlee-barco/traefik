@@ -180,7 +180,6 @@
 [metrics]
   [metrics.prometheus]
     entryPoint = "metrics"
-    manualRouting = true
 
 ################################################################
 # http
