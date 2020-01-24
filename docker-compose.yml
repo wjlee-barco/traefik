@@ -39,7 +39,7 @@ services:
 
       - "traefik.http.routers.traefik-https.tls=true"
       - "traefik.http.routers.traefik-https.tls.certresolver=le"
-      - "traefik.http.routers.traefik-https.service=traefik"
+      - "traefik.http.routers.traefik-https.service=api@internal"
 
       #- "traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD"
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
@@ -49,7 +49,7 @@ services:
       - "traefik.http.routers.metrics.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/metrics`)"
       - "traefik.http.routers.metrics.tls=true"
       - "traefik.http.routers.metrics.tls.certResolver=le"
-      - "traefik.http.routers.metrics.service=metrics"
+      - "traefik.http.routers.metrics.service=prometheus@internal"
       - "traefik.http.services.metrics.loadbalancer.server.port=8082"
   whoami:
     # A container that exposes an API to show its IP address

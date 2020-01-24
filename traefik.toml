@@ -27,6 +27,8 @@
     address = ":80"
   [entryPoints.https]
     address = ":443"
+  [entryPoints.metrics]
+    address = ":8082"
   [entryPoints.whoami]
     address = ":8086"
 
@@ -178,7 +180,7 @@
 [metrics]
   [metrics.prometheus]
     entryPoint = "metrics"
-    address = ":8082"
+    manualRouting = true
 
 ################################################################
 # http
