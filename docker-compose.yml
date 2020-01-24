@@ -25,7 +25,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.toml:/etc/traefik/traefik.toml
       - ./letsencrypt/acme.json:/etc/traefik/acme.json
-      -  ./access.log:/etc/traefik/log/access.log
+      -  ./log/access.log:/etc/traefik/log/access.log
   whoami:
     # A container that exposes an API to show its IP address
     image: containous/whoami

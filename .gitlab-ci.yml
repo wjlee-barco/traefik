@@ -16,9 +16,9 @@ traefik:
         - sudo chmod 600 $PWD/letsencrypt/acme.json
 
         - sudo mkdir log
-        - sudo touch log/access.log
-        - sudo chmod 777 log/access.log
-        - sudo chown -R gitlab-runner:gitlab-runner log
+        - sudo touch ./log/access.log
+        - sudo chmod 777 ./log/access.log
+        - sudo chown -R gitlab-runner:gitlab-runner ./log
         # - sudo bash ./scripts/before_script_install.sh
         - set -e # Enable exit on error 
     script:
