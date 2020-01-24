@@ -194,7 +194,7 @@
       #middlewares = ["whoami-auth"]      
       service = "whoami"
       rule = "Host(`wjlee.myqnapcloud.com`) && Path(`/whoami/`)"
-      [http.routers.Router-1-https.tls] # will terminate the TLS request
+      [http.routers.whoami-https.tls] # will terminate the TLS request
         certResolver = "le"
     [http.routers.whoami-http]
       entryPoints = ["http"]
@@ -215,6 +215,6 @@
     [http.services.whoami]
       [http.services.whoami.loadBalancer]
         [[http.services.whoami.loadBalancer.servers]]
-          url = "http://192.168.31.31/whoami"
+          url = "http://wjlee.myqnapcloud.com/whoami"
         [[http.services.whoami.loadBalancer.servers]]
-          url = "http://192.168.31.31/whoami2"
+          url = "http://wjlee.myqnapcloud.com/whoami2"
