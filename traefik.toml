@@ -174,7 +174,6 @@
     # Default: true
     #
     endpoint = "unix:///var/run/docker.sock"
-    domain = "wjlee.myqnapcloud.com"
     watch = true
     exposedbydefault = false
 ################################################################
