@@ -24,26 +24,26 @@
 
 [entryPoints]
   [entryPoints.http]
-    #address = ":80"
-    address = "http://wjlee.myqnapcloud.com"
+    address = ":80"
+    #address = "http://wjlee.myqnapcloud.com"
     #[entryPoints.http.metrics]
-    #  #address = ":8082"
+    address = ":8082"
     #  address = "http://wjlee.myqnapcloud.com/metrics"
     #[entryPoints.http.whoami]
-    #  #address = ":8086"
+    address = ":8086"
     #  address = "http://wjlee.myqnapcloud.com/whoami"
     #[entryPoints.http.forwardauth]
     #  #address = ":4181"
     #  address = "http://wjlee.myqnapcloud.com/forwardauth"
     #  authResponseHeaders = ["X-Forwarded-User"]
   [entryPoints.https]
-    #address = ":443"
-    address = "https://wjlee.myqnapcloud.com"
+    address = ":443"
+    #address = "https://wjlee.myqnapcloud.com"
     #[entryPoints.https.metrics]
-    #  #address = ":8082"
+    address = ":8082"
     #  address = "https://wjlee.myqnapcloud.com/metrics"
     #[entryPoints.https.whoami]
-    #  #address = ":8086"
+    address = ":8086"
     #  address = "https://wjlee.myqnapcloud.com/whoami"
     #[entryPoints.https.forwardauth]
     #  #address: 4181
