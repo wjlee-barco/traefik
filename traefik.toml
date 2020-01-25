@@ -29,9 +29,9 @@
     #[entryPoints.http.metrics]
     #  #address = ":8082"
     #  address = "http://wjlee.myqnapcloud.com/metrics"
-    [entryPoints.http.whoami]
-      #address = ":8086"
-      address = "http://wjlee.myqnapcloud.com/whoami"
+    #[entryPoints.http.whoami]
+    #  #address = ":8086"
+    #  address = "http://wjlee.myqnapcloud.com/whoami"
     #[entryPoints.http.forwardauth]
     #  #address = ":4181"
     #  address = "http://wjlee.myqnapcloud.com/forwardauth"
@@ -42,9 +42,9 @@
     #[entryPoints.https.metrics]
     #  #address = ":8082"
     #  address = "https://wjlee.myqnapcloud.com/metrics"
-    [entryPoints.https.whoami]
-      #address = ":8086"
-      address = "https://wjlee.myqnapcloud.com/whoami"
+    #[entryPoints.https.whoami]
+    #  #address = ":8086"
+    #  address = "https://wjlee.myqnapcloud.com/whoami"
     #[entryPoints.https.forwardauth]
     #  #address: 4181
     #  address = "https://wjlee.myqnapcloud.com/forwardauth"
