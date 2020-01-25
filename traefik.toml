@@ -184,12 +184,12 @@
   email = "wjlee@csie.nctu.edu.tw"
   storage = "/etc/traefik/acme.json"
   caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
-  tlschallenge=true
   [certificatesResolvers.le.acme.httpChallenge]
     # used during the challenge
     entryPoint = "http"
   [certificatesResolvers.le.acme.dnsChallenge]
     resolvers = ["1.1.1.1:53", "8.8.8.8:53"]
+  [certificatesResolvers.le.acme.tlsChallenge]
   
 
 ################################################################
