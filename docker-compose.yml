@@ -43,7 +43,7 @@ services:
 
       #- "traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD"
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
-      
+      - "traefik.http.middlewares.compress=true"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
       ### metric ===================================================
       - "traefik.http.routers.metrics.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/metrics`)"
@@ -77,6 +77,29 @@ services:
       - traefik.docker.network=proxy
     networks:
       - proxy
+  traefik-forward-auth:
+    container_name: traefik-forward-auth
+    image: thomseddon/traefik-forward-auth
+    ports:
+      - 4181:4181
+    environment:
+      - CLIENT_ID=client_id
+      - CLIENT_SECRET=client_secret
+      - SECRET=secret
+
+      - AUTH_HOST=auth.sub.domain.com
+      - COOKIE_DOMAIN=sub.domain.com
+      - INSECURE_COOKIE=true
+      - WHITELIST=me@email.com
+      - LOG_LEVEL=debug
+    labels:
+      - traefik.enable=true
+      - "traefik.http.middlewares.compress=true"
+      - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+      - 1.0.0.1
   # yourls:
   #   image: yourls
   #   container_name:  yourls

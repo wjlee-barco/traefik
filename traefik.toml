@@ -25,12 +25,30 @@
 [entryPoints]
   [entryPoints.http]
     address = ":80"
+    address = "http://wjlee.myqnapcloud.com"
+    [entryPoints.http.metrics]
+      address = ":8082"
+      address = "http://wjlee.myqnapcloud.com/metrics"
+    [entryPoints.http.whoami]
+      address = ":8086"
+      address = "http://wjlee.myqnapcloud.com/whoami"
+    [entryPoints.http.auth.forward]
+      address = ":4181"
+      address = "http://wjlee.myqnapcloud.com/auth-forward"
+      authResponseHeaders = ["X-Forwarded-User"]
   [entryPoints.https]
     address = ":443"
-  [entryPoints.metrics]
-    address = ":8082"
-  [entryPoints.whoami]
-    address = ":8086"
+    address = "https://wjlee.myqnapcloud.com"
+    [entryPoints.https.metrics]
+      address = ":8082"
+      address = "https://wjlee.myqnapcloud.com/metrics"
+    [entryPoints.https.whoami]
+      address = ":8086"
+      address = "https://wjlee.myqnapcloud.com/whoami"
+    [entryPoints.https.auth.forward]
+      address: 4181
+      address = "https://wjlee.myqnapcloud.com/auth-forward"
+      authResponseHeaders = ["X-Forwarded-User"]
 
 ################################################################
 # Traefik logs configuration
@@ -127,39 +145,39 @@
   #
   # entryPoint = "traefik"
 
+[providers]
+################################################################
+# File configuration backend
+################################################################
+  [providers.file]
+    watch=true
 ################################################################
 # Docker configuration backend
 ################################################################
+  [providers.docker]
+    # Docker server endpoint. Can be a tcp or a unix socket endpoint.
+    #
+    # Required
+    # Default: "unix:///var/run/docker.sock"
+    #
+    # endpoint = "tcp://10.10.10.10:2375"
 
-# Enable Docker configuration backend
-[providers.docker]
+    # Default host rule.
+    #
+    # Optional
+    # Default: "Host(`{{ normalize .Name }}`)"
+    #
+    # defaultRule = "Host(`{{ normalize .Name }}.docker.localhost`)"
 
-  # Docker server endpoint. Can be a tcp or a unix socket endpoint.
-  #
-  # Required
-  # Default: "unix:///var/run/docker.sock"
-  #
-  # endpoint = "tcp://10.10.10.10:2375"
-
-  # Default host rule.
-  #
-  # Optional
-  # Default: "Host(`{{ normalize .Name }}`)"
-  #
-  # defaultRule = "Host(`{{ normalize .Name }}.docker.localhost`)"
-
-  # Expose containers by default in traefik
-  #
-  # Optional
-  # Default: true
-  #
-  exposedByDefault = false
-[docker]
-  endpoint = "unix:///var/run/docker.sock"
-  domain = "wjlee.myqnapcloud.com"
-  watch = true
-  exposedbydefault = false
-
+    # Expose containers by default in traefik
+    #
+    # Optional
+    # Default: true
+    #
+    endpoint = "unix:///var/run/docker.sock"
+    domain = "wjlee.myqnapcloud.com"
+    watch = true
+    exposedbydefault = false
 ################################################################
 # ACME
 ################################################################
@@ -189,13 +207,13 @@
   # Add the router
   [http.routers]
     [http.routers.whoami-http]
-      entryPoints = ["http"]
+      entryPoints = ["http.whoami"]
       middlewares = ["https-redirect"]
       #middlewares = ["whoami-auth"]      
       service = "whoami"
       rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)"
     [http.routers.whoami-https]
-      entryPoints = ["https"]
+      entryPoints = ["https.whoami"]
       #middlewares = ["whoami-auth"]      
       service = "whoami"
       rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)"
@@ -216,6 +234,7 @@
         certResolver = "le"
   # Add the middleware
   [http.middlewares]    
+    [http.middlewares.compress.compress]
   #  [http.middlewares.whoami-auth.basicAuth]
   #    users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/", 
   #              "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"]
@@ -231,4 +250,4 @@
         [[http.services.whoami.loadBalancer.servers]]
           url = "http://wjlee.myqnapcloud.com/whoami"
         [[http.services.whoami.loadBalancer.servers]]
-          url = "http://wjlee.myqnapcloud.com/whoami2"
+          url = "https://wjlee.myqnapcloud.com/whoami"
