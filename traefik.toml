@@ -150,7 +150,6 @@
 ################################################################
   [providers.file]
     watch=true
-  [providers.file]
     directory=/configuration/
 ################################################################
 # Docker configuration backend
