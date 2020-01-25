@@ -32,7 +32,7 @@
     [entryPoints.http.whoami]
       #address = ":8086"
       address = "http://wjlee.myqnapcloud.com/whoami"
-    [entryPoints.http.auth.forward]
+    [entryPoints.http.auth-forward]
       #address = ":4181"
       address = "http://wjlee.myqnapcloud.com/auth-forward"
       authResponseHeaders = ["X-Forwarded-User"]
@@ -45,7 +45,7 @@
     [entryPoints.https.whoami]
       #address = ":8086"
       address = "https://wjlee.myqnapcloud.com/whoami"
-    [entryPoints.https.auth.forward]
+    [entryPoints.https.auth-forward]
       #address: 4181
       address = "https://wjlee.myqnapcloud.com/auth-forward"
       authResponseHeaders = ["X-Forwarded-User"]
