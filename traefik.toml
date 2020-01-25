@@ -32,9 +32,9 @@
     [entryPoints.http.whoami]
       #address = ":8086"
       address = "http://wjlee.myqnapcloud.com/whoami"
-    [entryPoints.http.auth-forward]
+    [entryPoints.http.forwardauth]
       #address = ":4181"
-      address = "http://wjlee.myqnapcloud.com/auth-forward"
+      address = "http://wjlee.myqnapcloud.com/forwardauth"
       authResponseHeaders = ["X-Forwarded-User"]
   [entryPoints.https]
     #address = ":443"
@@ -45,9 +45,9 @@
     [entryPoints.https.whoami]
       #address = ":8086"
       address = "https://wjlee.myqnapcloud.com/whoami"
-    [entryPoints.https.auth-forward]
+    [entryPoints.https.forwardauth]
       #address: 4181
-      address = "https://wjlee.myqnapcloud.com/auth-forward"
+      address = "https://wjlee.myqnapcloud.com/forwardauth"
       authResponseHeaders = ["X-Forwarded-User"]
 ################################################################
 # Traefik logs configuration
