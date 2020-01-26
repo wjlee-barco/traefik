@@ -222,13 +222,11 @@
         certResolver = "le"
     [http.routers.traefik-http]
       entryPoints = ["http"]
-      middlewares = ["https-redirect"]
-      #middlewares = ["traefik-auth"]      
+      middlewares = ["https-redirect"]   
       service = "traefik"
       rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
     [http.routers.traefik-https]
-      entryPoints = ["https"]
-      #middlewares = ["traefik-auth"]      
+      entryPoints = ["https"]  
       service = "traefik"
       rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
       [http.routers.traefik-https.tls]

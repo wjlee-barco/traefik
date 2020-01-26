@@ -37,13 +37,12 @@ services:
 
       - "traefik.http.routers.traefik-https.entrypoints=https"
       - "traefik.http.routers.traefik-https.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
-      #- "traefik.http.routers.traefik-https.middlewares=traefik-auth"
+
 
       - "traefik.http.routers.traefik-https.tls=true"
       - "traefik.http.routers.traefik-https.tls.certresolver=le"
       - "traefik.http.routers.traefik-https.service=traefik"
 
-      #- "traefik.http.middlewares.traefik-auth.basicauth.users=USER:PASSWORD"
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.compress=true"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
@@ -103,9 +102,9 @@ services:
 
       - traefik.http.services.home-nginx.loadbalancer.server.port=9080
       - traefik.http.services.home-nginx.loadbalancer.server.port=9443
-      - traefik.docker.network=internal 
+      - traefik.docker.network=proxy
     networks:
-      - internal
+      - proxy
   # traefik-forward-auth:
   #   container_name: traefik-forward-auth
   #   image: thomseddon/traefik-forward-auth
