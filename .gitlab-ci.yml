@@ -51,7 +51,7 @@ traefik:
 
         # get acme now..
         - sudo curl https://get.acme.sh | sudo sh
-        - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue -d wjlee.myqnapcloud.com -d 192.168.31.31 --standalone -httpport 88
+        - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue -d wjlee.myqnapcloud.com -d 192.168.31.31 --standalone --httpport 88
 
         - sudo docker-compose up
 
