@@ -248,10 +248,10 @@
   [http.services]
     [http.services.whoami]
       [http.services.whoami.loadBalancer]
-        [http.services.whoami.loadBalancer.servers]
-          url = "http://wjlee.myqnapcloud.com/whoami"
-        [http.services.whoami.loadBalancer.servers]
-          url = "https://wjlee.myqnapcloud.com/whoami"
+        [[http.services.whoami.loadBalancer.servers]]
+          url = "http://192.168.31.31:8082"
+        [[http.services.whoami.loadBalancer.servers]]
+          url = "https://192.168.31.31/whoami"
     #[http.services.metrics]
     #  [http.services.metrics.loadBalancer]
     #    [[http.services.metrics.loadBalancer.servers]]
