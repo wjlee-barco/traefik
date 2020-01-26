@@ -249,7 +249,7 @@
     [http.services.whoami]
       [http.services.whoami.loadBalancer]
         [[http.services.whoami.loadBalancer.servers]]
-          url = "http://192.168.31.31:8082"
+          url = "http://192.168.31.31:8086"
         [[http.services.whoami.loadBalancer.servers]]
           url = "https://192.168.31.31/whoami"
     #[http.services.metrics]

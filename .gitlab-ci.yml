@@ -28,7 +28,7 @@ traefik:
         - echo $USER
         - ip route show
         - ifconfig
-        
+        - sudo timedatectl set-timezone Asia/Taipei
         - sudo lsb_release -a
         - sudo uname -a
         - sudo docker --version
