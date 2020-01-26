@@ -48,10 +48,11 @@ traefik:
 
         - sudo docker network create proxy
         - sudo docker network create internal
-        
+
         # get acme now..
         - sudo curl https://get.acme.sh | sudo sh
         - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue --domain wjlee.myqnapcloud.com  --standalone
+        - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue --domain 192.168.31.31  --standalone
 
         - sudo docker-compose up
 
