@@ -26,8 +26,8 @@
   [entryPoints.http]
     address = ":80"
     #address = "http://wjlee.myqnapcloud.com"
-    [entryPoints.http.metrics]
-    address = ":8082"
+    #[entryPoints.http.metrics]
+    #address = ":8082"
     #address = "http://wjlee.myqnapcloud.com/metrics"
     #[entryPoints.http.whoami]
     #address = ":8086"
@@ -39,8 +39,8 @@
   [entryPoints.https]
     address = ":443"
     #address = "https://wjlee.myqnapcloud.com"
-    [entryPoints.https.metrics]
-    address = ":8082"
+    #[entryPoints.https.metrics]
+    #address = ":8082"
     #address = "https://wjlee.myqnapcloud.com/metrics"
     #[entryPoints.https.whoami]
     #address = ":8086"
@@ -269,7 +269,7 @@
           url = "http://wjlee.myqnapcloud.com"
         [[http.services.home-nginx.loadBalancer.servers]]
           url = "https://wjlee.myqnapcloud.com"
-    #[http.services.metrics]
-    #  [http.services.metrics.loadBalancer]
-    #    [[http.services.metrics.loadBalancer.servers]]
-    #      url = "https://wjlee.myqnapcloud.com/metrics"
+    [http.services.metrics]
+      [http.services.metrics.loadBalancer]
+        [[http.services.metrics.loadBalancer.servers]]
+          url = "https://wjlee.myqnapcloud.com/metrics"
