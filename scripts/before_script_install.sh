@@ -17,6 +17,9 @@ sudo apt-get -y install curl
 # install ntp
 sudo apt-get -y install ntp
 sudo service ntp restart
+
+# install socat
+sudo apt-get install -y socat 
     
 # docker installation
 sudo curl -sSL https://get.docker.com | sh

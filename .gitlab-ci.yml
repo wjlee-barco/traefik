@@ -15,6 +15,8 @@ traefik:
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/letsencrypt/acme.json
         - sudo chmod 600 $PWD/letsencrypt/acme.json
 
+        - sudo curl https://get.acme.sh | sudo sh
+        - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue --domain wjlee.myqnapcloud.com  --standalone
         - sudo mkdir log
         - sudo touch ./log/access.log
         - sudo chmod 777 ./log/access.log
