@@ -83,8 +83,8 @@ services:
     restart: always
     container_name: home-nginx
     ports:
-      - 9080:80
-      - 9443:443
+      - 9080:8080   ## 9080 --> 8080
+      - 9443:8443   ## 9443 --> 8443
     labels:
       - traefik.enable=true
       - traefik.http.routers.home-nginx-http.entrypoints=http
