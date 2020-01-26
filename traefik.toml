@@ -248,9 +248,9 @@
   [http.services]
     [http.services.whoami]
       [http.services.whoami.loadBalancer]
-        [[http.services.whoami.loadBalancer.servers]]
+        [http.services.whoami.loadBalancer.servers]
           url = "http://wjlee.myqnapcloud.com/whoami"
-        [[http.services.whoami.loadBalancer.servers]]
+        [http.services.whoami.loadBalancer.servers]
           url = "https://wjlee.myqnapcloud.com/whoami"
     #[http.services.metrics]
     #  [http.services.metrics.loadBalancer]
