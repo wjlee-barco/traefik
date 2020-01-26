@@ -13,8 +13,8 @@ services:
     # Enables the web UI and tells Traefik to listen to docker
     container_name: traefik
     ports:
-      - 80:80
-      - 443:443
+      - 80:9080
+      - 443:9443
       - 8080:8080
       - 8082:8082
     networks:
@@ -83,8 +83,8 @@ services:
     restart: always
     container_name: home-nginx
     ports:
-      - 80:80
-      - 443:443
+      - 9080:80
+      - 9443:443
     labels:
       - traefik.enable=true
       - traefik.http.routers.home-nginx-http.entrypoints=http
