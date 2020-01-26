@@ -28,7 +28,7 @@
     #address = "http://wjlee.myqnapcloud.com"
     [entryPoints.http.metrics]
     address = ":8082"
-    address = "http://wjlee.myqnapcloud.com/metrics"
+    #address = "http://wjlee.myqnapcloud.com/metrics"
     #[entryPoints.http.whoami]
     #address = ":8086"
     #  address = "http://wjlee.myqnapcloud.com/whoami"
