@@ -41,7 +41,8 @@ traefik:
         - sudo docker stop  $(sudo docker container ls -aq --filter name=traefik*)
         - sudo docker stop  $(sudo docker container ls -aq --filter name=whoami*)
         - sudo docker stop  $(sudo docker container ls -aq --filter name=yourls*)
-        
+        - sudo docker stop  $(sudo docker container ls -aq --filter name=home-nginx*)
+
         # clean up all stop images
         - sudo docker container prune -f
         - sudo docker image prune -a -f
@@ -51,7 +52,7 @@ traefik:
 
         # get acme now..
         - sudo curl https://get.acme.sh | sudo sh
-        - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue -d wjlee.myqnapcloud.com --standalone --httpport 88
+        - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue -d wjlee.myqnapcloud.com --standalone
 
         - sudo docker-compose up
 
