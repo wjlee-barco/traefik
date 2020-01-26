@@ -3,8 +3,8 @@ version: '3'
 networks:
   proxy:
     external: true
-  # internal:
-  #   external: false
+  internal:
+    external: false
 services:
   traefik:
     # The official v2.0 Traefik docker image
@@ -19,6 +19,7 @@ services:
       - 8082:8082
     networks:
       - proxy
+      - internal
     volumes:
       - ./letsencrypt:/letsencrypt
       # So that Traefik can listen to the Docker events
@@ -102,8 +103,9 @@ services:
 
       - traefik.http.services.home-nginx.loadbalancer.server.port=9080
       - traefik.http.services.home-nginx.loadbalancer.server.port=9443
-      - traefik.docker.network=proxy 
-
+      - traefik.docker.network=internal 
+    networks:
+      - internal
   # traefik-forward-auth:
   #   container_name: traefik-forward-auth
   #   image: thomseddon/traefik-forward-auth
