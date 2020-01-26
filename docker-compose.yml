@@ -100,7 +100,8 @@ services:
 
       - traefik.http.middlewares.home-nginx-https-redirect.redirectscheme.scheme=https
 
-      - traefik.http.services.home-nginx.loadbalancer.server.port=80
+      - traefik.http.services.home-nginx.loadbalancer.server.port=9080
+      - traefik.http.services.home-nginx.loadbalancer.server.port=9443
       - traefik.docker.network=proxy 
 
   # traefik-forward-auth:
