@@ -27,7 +27,7 @@ services:
       - ./traefik.toml:/etc/traefik/traefik.toml
       - ./letsencrypt/acme.json:/etc/traefik/acme.json
       - "./configuration/:/configuration/"
-      - ./log/access.log:/etc/traefik/log/access.log
+      - ./log:/etc/traefik/log
     labels:
       - "traefik.enable=true"
       ### traefik ===================================================
@@ -78,33 +78,33 @@ services:
       - traefik.docker.network=proxy
     networks:
       - proxy
-  home-nginx:
-    image: bitnami/nginx
-    restart: always
-    container_name: home-nginx
-    ports:
-      - 9080:8080   ## 9080 --> 8080
-      - 9443:8443   ## 9443 --> 8443
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.home-nginx-http.entrypoints=http
-      - traefik.http.routers.home-nginx-http.rule=Host(`wjlee.myqnapcloud.com`)
-      - traefik.http.routers.home-nginx-http.middlewares=whoami-https-redirect
+  # pages-nginx:
+  #   image: bitnami/nginx
+  #   restart: always
+  #   container_name: pages-nginx
+  #   ports:
+  #     - 9080:8080   ## 9080 --> 8080
+  #     - 9443:8443   ## 9443 --> 8443
+  #   labels:
+  #     - traefik.enable=true
+  #     - traefik.http.routers.pages-nginx-http.entrypoints=http
+  #     - traefik.http.routers.pages-nginx-http.rule=Host(`wjlee.myqnapcloud.com`)
+  #     - traefik.http.routers.pages-nginx-http.middlewares=whoami-https-redirect
 
-      - traefik.http.routers.home-nginx-https.entrypoints=https
-      - traefik.http.routers.home-nginx-https.rule=Host(`wjlee.myqnapcloud.com`)
+  #     - traefik.http.routers.pages-nginx-https.entrypoints=https
+  #     - traefik.http.routers.pages-nginx-https.rule=Host(`wjlee.myqnapcloud.com`)
 
-      - traefik.http.routers.home-nginx-https.tls=true
-      - traefik.http.routers.home-nginx-https.tls.certresolver=le
-      - traefik.http.routers.home-nginx-https.service=home-nginx
+  #     - traefik.http.routers.pages-nginx-https.tls=true
+  #     - traefik.http.routers.pages-nginx-https.tls.certresolver=le
+  #     - traefik.http.routers.pages-nginx-https.service=pages-nginx
 
-      - traefik.http.middlewares.home-nginx-https-redirect.redirectscheme.scheme=https
+  #     - traefik.http.middlewares.pages-nginx-https-redirect.redirectscheme.scheme=https
 
-      - traefik.http.services.home-nginx.loadbalancer.server.port=9080
-      - traefik.http.services.home-nginx.loadbalancer.server.port=9443
-      - traefik.docker.network=proxy
-    networks:
-      - proxy
+  #     - traefik.http.services.pages-nginx.loadbalancer.server.port=9080
+  #     - traefik.http.services.pages-nginx.loadbalancer.server.port=9443
+  #     - traefik.docker.network=proxy
+  #   networks:
+  #     - proxy
   # traefik-forward-auth:
   #   container_name: traefik-forward-auth
   #   image: thomseddon/traefik-forward-auth
