@@ -41,9 +41,9 @@ traefik:
         - sudo docker stop  $(sudo docker container ls -aq --filter name=traefik*)
         - sudo docker stop  $(sudo docker container ls -aq --filter name=whoami*)
         - sudo docker stop  $(sudo docker container ls -aq --filter name=yourls*)
-        - sudo docker stop  $(sudo docker container ls -aq --filter name=home-nginx*)
+        # - sudo docker stop  $(sudo docker container ls -aq --filter name=pages-nginx*)
 
-        # clean up all stop images
+       # clean up all stop images, containers
         - sudo docker container prune -f
         - sudo docker image prune -a -f
 

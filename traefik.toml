@@ -231,16 +231,16 @@
       rule = "Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
       [http.routers.traefik-https.tls]
         certResolver = "le"
-    [http.routers.home-nginx-http]
+    [http.routers.pages-nginx-http]
       entryPoints = ["http"]
       middlewares = ["https-redirect"]    
-      service = "home-nginx"
+      service = "pages-nginx"
       rule = "Host(`wjlee.myqnapcloud.com`)"
-    [http.routers.home-nginx-https]
+    [http.routers.pages-nginx-https]
       entryPoints = ["https"] 
-      service = "home-nginx"
+      service = "pages-nginx"
       rule = "Host(`wjlee.myqnapcloud.com`)"
-      [http.routers.home-nginx-https.tls]
+      [http.routers.pages-nginx-https.tls]
         certResolver = "le"
   # Add the middleware
   [http.middlewares]    
@@ -253,7 +253,7 @@
       scheme = "https"
     [http.middlewares.traefik-https-redirect.redirectscheme]
       scheme = "https"
-    [http.middlewares.home-nginx-https-redirect.redirectscheme]
+    [http.middlewares.pages-nginx-https-redirect.redirectscheme]
       scheme = "https"
   # Add the service
   [http.services]
@@ -263,11 +263,11 @@
           url = "http://wjlee.myqnapcloud.com:8086"
         [[http.services.whoami.loadBalancer.servers]]
           url = "https://wjlee.myqnapcloud.com/whoami"
-    [http.services.home-nginx]
-      [http.services.home-nginx.loadBalancer]
-        [[http.services.home-nginx.loadBalancer.servers]]
+    [http.services.pages-nginx]
+      [http.services.pages-nginx.loadBalancer]
+        [[http.services.pages-nginx.loadBalancer.servers]]
           url = "http://wjlee.myqnapcloud.com"
-        [[http.services.home-nginx.loadBalancer.servers]]
+        [[http.services.pages-nginx.loadBalancer.servers]]
           url = "https://wjlee.myqnapcloud.com"
     [http.services.metrics]
       [http.services.metrics.loadBalancer]
