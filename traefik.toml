@@ -273,3 +273,9 @@
       [http.services.metrics.loadBalancer]
         [[http.services.metrics.loadBalancer.servers]]
           url = "https://wjlee.myqnapcloud.com/metrics"
+    [http.services.pages-nginx]
+      [http.services.pages-nginx.loadBalancer]
+        [[http.services.pages-nginx.loadBalancer.servers]]
+          url = "http://192.168.31.31"
+        [[http.services.pages-nginx.loadBalancer.servers]]
+          url = "https://192.168.31.31"
