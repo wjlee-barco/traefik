@@ -32,11 +32,11 @@ services:
       - "traefik.enable=true"
       ### pages-nginx ===================================================
       - "traefik.http.routers.pages-nginx-http.entrypoints=http"
-      - "traefik.http.routers.pages-nginx-http.rule=Host(`wjlee.myqnapcloud.com`)"
+      - "traefik.http.routers.pages-nginx-http.rule=Host(`192.168.31.31`)"
       - "traefik.http.routers.pages-nginx-http.middlewares=traefik-https-redirect"
 
       - "traefik.http.routers.pages-nginx-https.entrypoints=https"
-      - "traefik.http.routers.pages-nginx-https.rule=Host(`wjlee.myqnapcloud.com`)"
+      - "traefik.http.routers.pages-nginx-https.rule=Host(`192.168.31.31`)"
 
       - "traefik.http.routers.pages-nginx-https.tls=true"
       - "traefik.http.routers.pages-nginx-https.tls.certresolver=le"
@@ -45,11 +45,11 @@ services:
       - "traefik.http.services.pages-nginx.loadbalancer.server.port=80"
       ### traefik ===================================================
       - "traefik.http.routers.traefik-http.entrypoints=http"
-      - "traefik.http.routers.traefik-http.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
+      - "traefik.http.routers.traefik-http.rule=Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
       - "traefik.http.routers.traefik-http.middlewares=traefik-https-redirect"
 
       - "traefik.http.routers.traefik-https.entrypoints=https"
-      - "traefik.http.routers.traefik-https.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/traefik`)"
+      - "traefik.http.routers.traefik-https.rule=Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
 
 
       - "traefik.http.routers.traefik-https.tls=true"
@@ -60,7 +60,7 @@ services:
       - "traefik.http.middlewares.compress=true"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
       ### metric ===================================================
-      - "traefik.http.routers.metrics.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/metrics`)"
+      - "traefik.http.routers.metrics.rule=Host(`192.168.31.31`) && PathPrefix(`/metrics`)"
       - "traefik.http.routers.metrics.tls=true"
       - "traefik.http.routers.metrics.tls.certResolver=le"
       - "traefik.http.routers.metrics.service=metrics"
@@ -75,11 +75,11 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.whoami-http.entrypoints=http
-      - traefik.http.routers.whoami-http.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)
+      - traefik.http.routers.whoami-http.rule=Host(`192.168.31.31`) && PathPrefix(`/whoami`)
       - traefik.http.routers.whoami-http.middlewares=whoami-https-redirect
 
       - traefik.http.routers.whoami-https.entrypoints=https
-      - traefik.http.routers.whoami-https.rule=Host(`wjlee.myqnapcloud.com`) && PathPrefix(`/whoami`)
+      - traefik.http.routers.whoami-https.rule=Host(`192.168.31.31`) && PathPrefix(`/whoami`)
 
       - traefik.http.routers.whoami-https.tls=true
       - traefik.http.routers.whoami-https.tls.certresolver=le

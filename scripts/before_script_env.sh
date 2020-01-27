@@ -6,5 +6,6 @@ if [ -e .env ]; then
 else 
     echo "It seems you didn´t create your .env file, so we will create one for you."
     cp .env.sample .env
+    source .env
     # exit 1
 fi
