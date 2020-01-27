@@ -24,31 +24,11 @@
 
 [entryPoints]
   [entryPoints.http]
-    address = ":80"
-    #address = "http://192.168.31.31"
-    #[entryPoints.http.metrics]
-    #address = ":8082"
-    #address = "http://192.168.31.31/metrics"
-    #[entryPoints.http.whoami]
-    #address = ":8086"
-    #  address = "http://192.168.31.31/whoami"
-    #[entryPoints.http.forwardauth]
-    #  #address = ":4181"
-    #  address = "http://192.168.31.31/forwardauth"
-    #  authResponseHeaders = ["X-Forwarded-User"]
-  [entryPoints.https]
-    address = ":443"
-    #address = "https://192.168.31.31"
-    #[entryPoints.https.metrics]
-    #address = ":8082"
-    #address = "https://192.168.31.31/metrics"
-    #[entryPoints.https.whoami]
-    #address = ":8086"
-    #  address = "https://192.168.31.31/whoami"
-    #[entryPoints.https.forwardauth]
-    #  #address: 4181
-    #  address = "https://192.168.31.31/forwardauth"
-    #  authResponseHeaders = ["X-Forwarded-User"]
+    [entryPoints.http.pages-nginx-http]
+      address = "80:80"
+    [entryPoints.http.whoami]
+      address = "8086:8086"
+
 ################################################################
 # Traefik logs configuration
 ################################################################
@@ -190,7 +170,6 @@
   [certificatesResolvers.le.acme.dnsChallenge]
     resolvers = ["1.1.1.1:53", "8.8.8.8:53"]
   [certificatesResolvers.le.acme.tlsChallenge]
-  
 
 ################################################################
 # metrics
@@ -207,69 +186,13 @@
 [http]
   # Add the router
   [http.routers]
-    [http.routers.whoami-http]
-      entryPoints = ["http.whoami"]
-      middlewares = ["https-redirect"]
-      #middlewares = ["whoami-auth"]      
-      service = "whoami"
-      rule = "Host(`192.168.31.31`) && PathPrefix(`/whoami`)"
-    [http.routers.whoami-https]
-      entryPoints = ["https.whoami"]
-      #middlewares = ["whoami-auth"]      
-      service = "whoami"
-      rule = "Host(`192.168.31.31`) && PathPrefix(`/whoami`)"
-      [http.routers.whoami-https.tls]
-        certResolver = "le"
-    [http.routers.traefik-http]
-      entryPoints = ["http"]
-      middlewares = ["https-redirect"]   
-      service = "traefik"
-      rule = "Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
-    [http.routers.traefik-https]
-      entryPoints = ["https"]  
-      service = "traefik"
-      rule = "Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
-      [http.routers.traefik-https.tls]
-        certResolver = "le"
     [http.routers.pages-nginx-http]
-      entryPoints = ["http"]
-      middlewares = ["https-redirect"]    
+      entryPoints = ["pages-nginx-http"] 
       service = "pages-nginx"
       rule = "Host(`192.168.31.31`)"
-    [http.routers.pages-nginx-https]
-      entryPoints = ["https"] 
-      service = "pages-nginx"
-      rule = "Host(`192.168.31.31`)"
-      [http.routers.pages-nginx-https.tls]
-        certResolver = "le"
-  # Add the middleware
-  [http.middlewares]    
-    [http.middlewares.compress.compress]
-  #  [http.middlewares.whoami-auth.basicAuth]
-  #    users = ["test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/", 
-  #              "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"]
-  #    usersFile = "etc/traefik/.htpasswd"
-    [http.middlewares.whoami-https-redirect.redirectscheme]
-      scheme = "https"
-    [http.middlewares.traefik-https-redirect.redirectscheme]
-      scheme = "https"
-    [http.middlewares.pages-nginx-https-redirect.redirectscheme]
-      scheme = "https"
   # Add the service
   [http.services]
-    [http.services.whoami]
-      [http.services.whoami.loadBalancer]
-        [[http.services.whoami.loadBalancer.servers]]
-          url = "http://192.168.31.31:8086"
-        [[http.services.whoami.loadBalancer.servers]]
-          url = "https://192.168.31.31/whoami"
-    [http.services.metrics]
-      [http.services.metrics.loadBalancer]
-        [[http.services.metrics.loadBalancer.servers]]
-          url = "https://192.168.31.31/metrics"
     [http.services.pages-nginx]
       [http.services.pages-nginx.loadBalancer]
         [[http.services.pages-nginx.loadBalancer.servers]]
           url = "http://192.168.31.31"
-        [[http.services.pages-nginx.loadBalancer.servers]]
-          url = "https://192.168.31.31"
