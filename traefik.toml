@@ -186,9 +186,17 @@
   # Add the router
   [http.routers]
     [http.routers.pages-nginx-http]
-      entryPoints = ["pages-nginx-http"] 
+      entryPoints = ["http"] 
       service = "pages-nginx"
-      rule = "Host(`192.168.31.31`)"
+      rule = "Host(`192.168.31.31`) && PathPrefix(`/`)"
+    [http.routers.traefik-http]
+      entryPoints = ["http"] 
+      service = "traefik"
+      rule = "Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
+    [http.routers.whoami-http]
+      entryPoints = ["http"] 
+      service = "whoami"
+      rule = "Host(`192.168.31.31`) && PathPrefix(`/whoami`)"
   # Add the service
   [http.services]
     [http.services.pages-nginx]
