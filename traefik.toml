@@ -24,8 +24,6 @@
 
 [entryPoints]
   [entryPoints.http]
-    [entryPoints.http.pages-nginx-http]
-      address = "80:80"
     [entryPoints.http.whoami]
       address = "8086:8086"
 

@@ -37,6 +37,9 @@ services:
       ### traefik ===================================================
       - "traefik.http.routers.traefik-http.entrypoints=traefik-http"
       - "traefik.http.routers.traefik-http.rule=Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
+      - "traefik.http.routers.traefik-http.middlewares=traefik-http-stripprefix"
+      - "traefik.http.middlewares.traefik-http-stripprefix.stripprefix.prefixes=/traefik"
+      
       - "traefik.http.routers.traefik-http.service=traefik"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
       ### ===========================================================
@@ -53,7 +56,10 @@ services:
       ### whoami=====================================================
       - "traefik.http.routers.whoami-http.entrypoints=whoami-http"
       - "traefik.http.routers.whoami-http.rule=Host(`192.168.31.31`) && PathPrefix(`/whoami`)"
-      - "traefik.http.routers.traefik-http.service=whoami"
+      - "traefik.http.routers.whoami-http.middlewares=whoami-http-stripprefix"
+      - "traefik.http.middlewares.whoami-http-stripprefix.stripprefix.prefixes=/whoami"
+      
+      - "traefik.http.routers.whoami-http.service=whoami"
       - "traefik.http.services.whoami.loadbalancer.server.port=8086"
       ### ===========================================================
       - "traefik.docker.network=proxy"
