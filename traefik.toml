@@ -206,12 +206,12 @@
     [http.services.pages-nginx]
       [http.services.pages-nginx.loadBalancer]
         [[http.services.pages-nginx.loadBalancer.servers]]
-          url = "http://192.168.31.31"
+          address = "http://192.168.31.31"
     [http.services.whoami]
       [http.services.whoami.loadBalancer]
         [[http.services.whoami.loadBalancer.servers]]
-          url = "http://192.168.31.31:8086"
+          address = "http://192.168.31.31:8086"
     [http.services.traefik]
       [http.services.traefik.loadBalancer]
         [[http.services.traefik.loadBalancer.servers]]
-          url = "http://192.168.31.31:8080"
+          address = "http://192.168.31.31:8080"
