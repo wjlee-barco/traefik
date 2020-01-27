@@ -44,16 +44,16 @@ services:
     container_name:  whoami
     ports:
       - 8086:80
-    labels:
-      # - "traefik.enable=true"
-      # ### whoami=====================================================
-      # - "traefik.http.routers.whoami-http.entrypoints=http"
-      # - "traefik.http.routers.whoami-http.rule=Host(`192.168.31.31`) && PathPrefix(`/whoami`)"
+    # labels:
+    #   - "traefik.enable=true"
+    #   ### whoami=====================================================
+    #   - "traefik.http.routers.whoami-http.entrypoints=http"
+    #   - "traefik.http.routers.whoami-http.rule=Host(`192.168.31.31`) && PathPrefix(`/whoami`)"
       
-      # - "traefik.http.routers.whoami-http.service=whoami"
-      # - "traefik.http.services.whoami.loadbalancer.server.port=8086"
-      # ### ===========================================================
-      # - "traefik.docker.network=proxy"
+    #   - "traefik.http.routers.whoami-http.service=whoami"
+    #   - "traefik.http.services.whoami.loadbalancer.server.port=8086"
+    #   ### ===========================================================
+    #   - "traefik.docker.network=proxy"
     networks:
       - proxy
   # traefik-forward-auth:
