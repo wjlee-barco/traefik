@@ -56,7 +56,7 @@
   # Optional
   # Default: os.Stdout
   #
-  filePath = "/etc/traefik/log/traefik.log"
+  # filePath = "/etc/traefik/log/traefik.log"
 
   # Format is either "json" or "common".
   #
