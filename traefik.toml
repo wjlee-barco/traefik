@@ -263,12 +263,6 @@
           url = "http://wjlee.myqnapcloud.com:8086"
         [[http.services.whoami.loadBalancer.servers]]
           url = "https://wjlee.myqnapcloud.com/whoami"
-    [http.services.pages-nginx]
-      [http.services.pages-nginx.loadBalancer]
-        [[http.services.pages-nginx.loadBalancer.servers]]
-          url = "http://wjlee.myqnapcloud.com"
-        [[http.services.pages-nginx.loadBalancer.servers]]
-          url = "https://wjlee.myqnapcloud.com"
     [http.services.metrics]
       [http.services.metrics.loadBalancer]
         [[http.services.metrics.loadBalancer.servers]]
@@ -277,3 +271,5 @@
       [http.services.pages-nginx.loadBalancer]
         [[http.services.pages-nginx.loadBalancer.servers]]
           url = "http://192.168.31.31"
+        [[http.services.pages-nginx.loadBalancer.servers]]
+          url = "https://192.168.31.31"
