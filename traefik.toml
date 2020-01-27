@@ -27,7 +27,7 @@
     address = ":80"
   #[entryPoints.https]
   #  address = ":443"
-  [entryPonts.Traefik]
+  [entryPonts.traefik]
     address = ":8080"
   [entryPonts.metrics]
     address = ":8082"
@@ -194,7 +194,7 @@
       service = "pages-nginx"
       rule = "Host(`192.168.31.31`) && PathPrefix(`/`)"
     [http.routers.traefik-http]
-      entryPoints = ["http"] 
+      entryPoints = ["traefik"] 
       service = "traefik"
       rule = "Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
     [http.routers.whoami-http]
