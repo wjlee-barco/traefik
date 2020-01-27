@@ -187,7 +187,6 @@
 ################################################################
 
 [http]
-  # Add the router
   [http.routers]
     [http.routers.pages-nginx-http]
       entryPoints = ["http"] 
