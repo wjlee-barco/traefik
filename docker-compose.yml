@@ -29,7 +29,7 @@ services:
       - "./configuration/:/configuration/"
       - ./log:/etc/traefik/log
     labels:
-      - "traefik.enable=true      
+      - "traefik.enable=true"
       ### pages-nginx ===================================================
       - "traefik.http.routers.pages-nginx-http.entrypoints=http"
       - "traefik.http.routers.pages-nginx-http.rule=Host(`wjlee.myqnapcloud.com`)"
