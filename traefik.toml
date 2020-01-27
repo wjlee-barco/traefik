@@ -24,8 +24,9 @@
 
 [entryPoints]
   [entryPoints.http]
-    [entryPoints.http.whoami]
-      address = "8086:8086"
+    address = ":80"
+  [entryPoints.https]
+    address = ":443"
 
 ################################################################
 # Traefik logs configuration
