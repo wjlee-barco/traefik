@@ -19,6 +19,7 @@ services:
     networks:
       - proxy
       - internal
+    network_mode: "host"
     volumes:
       - ./letsencrypt:/letsencrypt
       # So that Traefik can listen to the Docker events
@@ -56,6 +57,7 @@ services:
     #   - "traefik.docker.network=proxy"
     networks:
       - proxy
+    network_mode: "host"
   # traefik-forward-auth:
   #   container_name: traefik-forward-auth
   #   image: thomseddon/traefik-forward-auth
