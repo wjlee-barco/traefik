@@ -31,6 +31,7 @@ traefik:
         - sudo timedatectl set-timezone Asia/Taipei
         - sudo lsb_release -a
         - sudo uname -a
+        - sudo netstat -tupln
         - sudo docker --version
         - sudo docker images
         - sudo docker system df

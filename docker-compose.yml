@@ -31,7 +31,7 @@ services:
     #   - "traefik.enable=true"
     #   ### traefik ===================================================
     #   - "traefik.http.routers.traefik-http.entrypoints=http"
-    #   - "traefik.http.routers.traefik-http.rule=Host(`192.168.31.31`) && PathPrefix(`/traefik`)"
+    #   - "traefik.http.routers.traefik-http.rule=Host(\"192.168.31.31\") && PathPrefix(\"/traefik\")"
       
     #   - "traefik.http.routers.traefik-http.service=traefik"
     #   - "traefik.http.services.traefik.loadbalancer.server.port=8080"
@@ -48,7 +48,7 @@ services:
     #   - "traefik.enable=true"
     #   ### whoami=====================================================
     #   - "traefik.http.routers.whoami-http.entrypoints=http"
-    #   - "traefik.http.routers.whoami-http.rule=Host(`192.168.31.31`) && PathPrefix(`/whoami`)"
+    #   - "traefik.http.routers.whoami-http.rule=Host(\"192.168.31.31\") && PathPrefix(\"/whoami\")"
       
     #   - "traefik.http.routers.whoami-http.service=whoami"
     #   - "traefik.http.services.whoami.loadbalancer.server.port=8086"
@@ -87,7 +87,7 @@ services:
   #     - 8087:80
   #   labels:
   #     - traefik.enable=true
-  #     - traefik.http.routers.yourls.rule=Host(`wjlee.myqnapcloud.com/yourls`)
+  #     - traefik.http.routers.yourls.rule=Host(\"wjlee.myqnapcloud.com/yourls\")
   #     - traefik.http.routers.yourls.entrypoints=https
   #     - traefik.http.services.yourls.loadbalancer.server.port=8087
   #     - traefik.docker.network=proxy
