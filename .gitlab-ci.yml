@@ -55,6 +55,8 @@ traefik:
         - sudo curl https://get.acme.sh | sudo sh
         - sudo $HOME/.acme.sh/acme.sh --config-home $PWD/letsencrypt --force --debug --issue -d wjlee.myqnapcloud.com --standalone
 
+        #- sudo docker run --rm  -it  -v "$PWD/letsencrypt":/acme.sh  --net=host neilpang/acme.sh --issue -d wjlee.myqnapcloud.com  --standalone  --force --debug 
+
         - sudo docker-compose up
 
         - sudo chown -R gitlab-runner:gitlab-runner $PWD/*

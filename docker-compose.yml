@@ -1,10 +1,5 @@
 version: '3'
 
-networks:
-  proxy:
-    external: true
-  internal:
-    external: false
 services:
   traefik:
     image: traefik
@@ -16,9 +11,6 @@ services:
       - 443:443
       - 8080:8080
       - 8082:8082
-    networks:
-      - proxy
-      - internal
     network_mode: "host"
     volumes:
       - ./letsencrypt:/letsencrypt
@@ -55,8 +47,6 @@ services:
     #   - "traefik.http.services.whoami.loadbalancer.server.port=8086"
     #   ### ===========================================================
     #   - "traefik.docker.network=proxy"
-    networks:
-      - proxy
     network_mode: "host"
   # traefik-forward-auth:
   #   container_name: traefik-forward-auth
@@ -96,9 +86,6 @@ services:
   #     - traefik.docker.network=internal
   #   env_file:
   #     - .env
-  #   networks:
-  #     - proxy
-  #     - internal
   # shields:
   #     image: beevelop/shields
   #     container_name: shields      
