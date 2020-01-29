@@ -194,21 +194,21 @@
       entryPoints = ["traefik"] 
       service = "traefik"
       rule = "Host(\"192.168.31.31\") && PathPrefix(\"/traefik\")"
-    [http.routers.whoami-http]
-      entryPoints = ["http"] 
-      service = "whoami"
-      rule = "Host(\"192.168.31.31\") && PathPrefix(\"/whoami\")"
+    [http.routers.grafana-http]
+      entryPoints = ["grafana"] 
+      service = "grafana"
+      rule = "Host(\"192.168.31.31\") && PathPrefix(\"/grafana\")"
   # Add the service
   [http.services]
     [http.services.pages-nginx]
       [http.services.pages-nginx.loadBalancer]
         [[http.services.pages-nginx.loadBalancer.servers]]
-          address = "http://192.168.31.31:9080"
-    [http.services.whoami]
-      [http.services.whoami.loadBalancer]
-        [[http.services.whoami.loadBalancer.servers]]
-          address = "http://192.168.31.31:8086"
+          port = 8080
     [http.services.traefik]
       [http.services.traefik.loadBalancer]
         [[http.services.traefik.loadBalancer.servers]]
-          address = "http://192.168.31.31:8080"
+          port = 8080
+    [http.services.traefik]
+      [http.services.grafana.loadBalancer]
+        [[http.services.grafana.loadBalancer.servers]]
+          port = 3000
