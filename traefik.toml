@@ -190,14 +190,43 @@
       entryPoints = ["http"] 
       service = "pages-nginx"
       rule = "Host(\"192.168.31.31\") && PathPrefix(\"/\")"
+    [http.routers.pages-nginx-https]
+      entryPoints = ["https"] 
+      service = "pages-nginx"
+      rule = "Host(\"192.168.31.31\") && PathPrefix(\"/\")"
+      [http.routers.pages-nginx-https.tls]
+        certResolver = "le"
+
     [http.routers.traefik-http]
       entryPoints = ["traefik"] 
       service = "traefik"
       rule = "Host(\"192.168.31.31\") && PathPrefix(\"/traefik\")"
+    [http.routers.traefik-https]
+      entryPoints = ["https"] 
+      service = "traefik"
+      rule = "Host(\"192.168.31.31\") && PathPrefix(\"/traefik\")"
+      [http.routers.traefik-https.tls]
+        certResolver = "le"
+
     [http.routers.grafana-http]
       entryPoints = ["grafana"] 
       service = "grafana"
       rule = "Host(\"192.168.31.31\") && PathPrefix(\"/grafana\")"
+
+    [http.routers.grafana-https]
+      entryPoints = ["https"] 
+      service = "grafana"
+      rule = "Host(\"192.168.31.31\") && PathPrefix(\"/grafana\")"
+      [http.routers.grafana-https.tls]
+        certResolver = "le"
+
+  [http.middlewares]
+    [http.middlewares.traefik-https-redirect.redirectscheme]
+      scheme = "https"
+    [http.middlewares.pages-nginx-https-redirect.redirectscheme]
+      scheme = "https"
+    [http.middlewares.grafana-https-redirect.redirectscheme]
+      scheme = "https"
   # Add the service
   [http.services]
     [http.services.pages-nginx]
