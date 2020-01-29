@@ -208,7 +208,7 @@
       [http.services.traefik.loadBalancer]
         [[http.services.traefik.loadBalancer.servers]]
           port = 8080
-    [http.services.traefik]
+    [http.services.grafana]
       [http.services.grafana.loadBalancer]
         [[http.services.grafana.loadBalancer.servers]]
           port = 3000
