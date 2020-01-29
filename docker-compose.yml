@@ -32,14 +32,14 @@ services:
 
       - "traefik.http.routers.traefik-https.tls=true"
       - "traefik.http.routers.traefik-https.tls.certresolver=le"
-      - "traefik.http.routers.traefik-https.service=traefik"
+      - "traefik.http.routers.traefik-https.service=dashboard@internal"
 
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       ### traefik-http ==============================================
       - "traefik.http.routers.traefik-http.entrypoints=http"
       - "traefik.http.routers.traefik-http.rule=Host(\"192.168.31.31\") && PathPrefix(\"/traefik\")"
       
-      - "traefik.http.routers.traefik-http.service=traefik"
+      - "traefik.http.routers.traefik-http.service=dashboard@internal"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
       ### ===========================================================
       - "traefik.docker.network=proxy"
