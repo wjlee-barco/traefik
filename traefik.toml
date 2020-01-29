@@ -199,11 +199,11 @@
 
     [http.routers.traefik-http]
       entryPoints = ["traefik"] 
-      service = "traefik"
+      service = "dashboard@internal"
       rule = "Host(\"192.168.31.31\") && PathPrefix(\"/traefik\")"
     [http.routers.traefik-https]
       entryPoints = ["https"] 
-      service = "traefik"
+      service = "dashboard@internal"
       rule = "Host(\"192.168.31.31\") && PathPrefix(\"/traefik\")"
       [http.routers.traefik-https.tls]
         certResolver = "le"
@@ -232,10 +232,6 @@
     [http.services.pages-nginx]
       [http.services.pages-nginx.loadBalancer]
         [[http.services.pages-nginx.loadBalancer.servers]]
-          port = 8080
-    [http.services.traefik]
-      [http.services.traefik.loadBalancer]
-        [[http.services.traefik.loadBalancer.servers]]
           port = 8080
     [http.services.grafana]
       [http.services.grafana.loadBalancer]
