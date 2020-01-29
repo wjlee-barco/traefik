@@ -19,11 +19,11 @@ services:
     volumes:
       - ./letsencrypt:/letsencrypt
       # So that Traefik can listen to the Docker events
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.toml:/etc/traefik/traefik.toml
-      - ./letsencrypt/acme.json:/etc/traefik/acme.json
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./traefik.toml:/etc/traefik/traefik.toml"
+      - "./letsencrypt/acme.json:/etc/traefik/acme.json"
       - "./configuration/:/configuration/"
-      - ./log:/etc/traefik/log
+      - "./log:/etc/traefik/log"
     labels:
       - "traefik.enable=true"
       ### traefik-https =============================================
